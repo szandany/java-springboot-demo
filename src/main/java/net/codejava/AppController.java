@@ -63,4 +63,11 @@ public class AppController {
 	    dao.delete(id);
 	    return "redirect:/";       
 	}	
+
+	// add a method that will set amount to 0 for a given id from the clear button
+	@RequestMapping("/clear/{id}")
+	public String clear(@PathVariable(name = "id") int id) {
+	    dao.setAmountToZero(id);
+	    return "redirect:/";       
+	}
 }

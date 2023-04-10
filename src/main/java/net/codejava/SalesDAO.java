@@ -50,4 +50,10 @@ public class SalesDAO {
 		String sql = "DELETE FROM SALES WHERE id = ?";
 		jdbcTemplate.update(sql, id);
 	}
+
+	// add a method that will set amount to 0
+	public void setAmountToZero(int id) {
+		String sql = "UPDATE SALES SET amount=0 WHERE id=?";
+		jdbcTemplate.update(sql, id);
+	}
 }

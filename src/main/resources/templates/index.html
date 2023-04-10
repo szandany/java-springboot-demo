@@ -31,6 +31,10 @@
                     &nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/delete/' + ${sale.id}}">Delete</a>
                 </td>
+                <!-- Add a red button x shaped to clear amount by id -->
+                <td>
+                    <a th:href="@{'/clear/' + ${sale.id}}" style="color:red">X</a>
+                </td>
             </tr>
         </tbody>
     </table>
