@@ -4,6 +4,12 @@ name: CI
 on: 
   # manual trigger
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
   # runnnig on push to main and develop branches
   push:
     branches:
@@ -135,6 +141,9 @@ jobs:
       matrix: # defining the matrix strategy to run the job in parallel using x number of github-hosted runners defined in the env total_runners above
         runner-index: ${{ fromjson(needs.runner-indexes.outputs.json) }} # using the runner-indexes job output to define the matrix strategy
     steps:
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
       - name: Checkout repository # checkout the repository
         uses: actions/checkout@v3.0.2
       # caching the maven packages to speed up the build process. 
